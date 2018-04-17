@@ -37,18 +37,20 @@ void * loop(void * m) {
 
         string str = tcp.getMessage();
 
-        // deserialization (turn string back into json)
-        auto j = nlohmann::json::parse(str);
+        if (str != "") {
+            // deserialization (turn string back into json)
+            auto j = nlohmann::json::parse(str);
 
-        // Read out a value associated with a key in the json object
-        double temp;
-        if (j.find("temp") != j.end()) {
-            cout << ":::DEBUG::: there is an entry with key \"temp\"" << endl;
-            temp = j.at("temp");
+            // Read out a value associated with a key in the json object
+            double temp;
+            if (j.find("temp") != j.end()) {
+                cout << ":::DEBUG::: there is an entry with key \"temp\"" << endl;
+                temp = j.at("temp");
+            }
+            
+            // validate that the value is as expected
+            cout << "temperature is " + tostr(temp) + " degC" << endl;
         }
-
-        // validate that the value is as expected
-        cout << "temperature is " + tostr(temp) + " degC" << endl;
 
         tcp.clean(); // zeroes the "Message" variable and the receive buffer
         sleep(1);
