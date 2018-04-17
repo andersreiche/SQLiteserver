@@ -14,6 +14,13 @@
 TCPServer tcp;
 using namespace std;
 
+/* SQLite variables */
+sqlite3 *db; // The database
+char *zErrMsg = 0; // Holds the SQL database error message
+int rc; // Holds return values
+char *sql; // Holds the SQL commands to be executed
+const char* data = "Callback function called"; // Arg to callback function
+
 template <typename T> string tostr(const T& t) {
     ostringstream os;
     os << t;
@@ -47,11 +54,47 @@ void * loop(void * m) {
                 cout << ":::DEBUG::: there is an entry with key \"temp\"" << endl;
                 temp = j.at("temp");
             }
-            
-            // validate that the value is as expected
-            cout << "temperature is " + tostr(temp) + " degC" << endl;
-        }
 
+            if (j.find("command") != j.end()) {
+                cout << ":::DEBUG::: there is an entry with key \"command\"" << endl;
+                string command = j.at("command");
+
+                if (command == "set") {
+
+                    /* Create SQL statement */
+                    string x = "INSERT INTO SENSOR (ID,TEMPERATURE) VALUES (1, " + tostr(temp) + ");";
+                    char *y = new char[x.length() + 1];
+                    strcpy(y, x.c_str());
+                    sql = y;
+                    delete[] y;
+
+                    /* Execute SQL statement */
+                    rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
+
+                    if (rc != SQLITE_OK) {
+                        fprintf(stderr, "SQL error: %s\n", zErrMsg);
+                        sqlite3_free(zErrMsg);
+                    } else {
+                        fprintf(stdout, "Records created successfully\n\n\n");
+                    }
+                } else if (command == "get") {
+
+                    /* Create SQL statement */
+                    sql = "SELECT * from SENSOR";
+
+                    /* Execute SQL statement */
+                    rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
+
+                    if (rc != SQLITE_OK) {
+                        fprintf(stderr, "SQL error: %s\n", zErrMsg);
+                        sqlite3_free(zErrMsg);
+                    } else {
+                        fprintf(stdout, "SELECT done successfully\n\n\n");
+                    }
+                }
+            }
+        }
+        tcp.Send(":::DEBUG:::Server correctly recieved message");
         tcp.clean(); // zeroes the "Message" variable and the receive buffer
         sleep(1);
     }
@@ -60,12 +103,6 @@ void * loop(void * m) {
 
 int main(int argc, char** argv) {
 
-    /* SQLite variables */
-    sqlite3 *db; // The database
-    char *zErrMsg = 0; // Holds the SQL database error message
-    int rc; // Holds return values
-    char *sql; // Holds the SQL commands to be executed
-    const char* data = "Callback function called"; // Arg to callback function
 
     /* Open database */
     rc = sqlite3_open("test.db", &db);
