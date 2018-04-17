@@ -14,11 +14,32 @@
 TCPServer tcp;
 using namespace std;
 
+static int callback(void *NotUsed, int argc, char **argv, char **azColName) {
+    int i;
+    for (i = 0; i < argc; i++) {
+        printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+    }
+    printf("\n");
+    return 0;
+}
+
 void * loop(void * m) {
+
+
     pthread_detach(pthread_self()); // Thread should not be joined
     while (1) {
-
+        
         string str = tcp.getMessage();
+
+        // deserialization (turn string back into json)
+        auto j = nlohmann::json::parse(str);
+
+        // Read out a value associated with a key in the json object
+        double temp;
+        if (j.find("temp") != j.end()) {
+            cout << ":::DEBUG::: there is an entry with key \"temp\"" << endl;
+            temp = j.at("temp");
+        }
 
         tcp.clean(); // zeroes the "Message" variable and the receive buffer
         sleep(1);
@@ -29,10 +50,10 @@ void * loop(void * m) {
 int main(int argc, char** argv) {
 
     /* SQLite variables */
-    sqlite3 *db;        // The database
-    char *zErrMsg = 0;  // Holds the SQL database error message
-    int rc;             // Holds return values
-    char *sql;          // Holds the SQL commands to be executed
+    sqlite3 *db; // The database
+    char *zErrMsg = 0; // Holds the SQL database error message
+    int rc; // Holds return values
+    char *sql; // Holds the SQL commands to be executed
     const char* data = "Callback function called"; // Arg to callback function
 
     /* Open database */
@@ -43,6 +64,21 @@ int main(int argc, char** argv) {
         return (0);
     } else {
         fprintf(stdout, "Opened database successfully\n\n\n");
+    }
+    
+    /* Create SQL statement */
+    sql = "CREATE TABLE SENSOR("  \
+         "ID INT PRIMARY KEY     NOT NULL," \
+         "TEMPERATURE    FLOAT   NOT NULL);";
+    
+    /* Execute SQL statement */
+    rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
+
+    if (rc != SQLITE_OK) {
+        fprintf(stderr, "SQL error: %s\n", zErrMsg);
+        sqlite3_free(zErrMsg);
+    } else {
+        fprintf(stdout, "Table created successfully\n\n\n");
     }
 
     pthread_t msg;
