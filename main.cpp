@@ -14,6 +14,12 @@
 TCPServer tcp;
 using namespace std;
 
+template <typename T> string tostr(const T& t) {
+    ostringstream os;
+    os << t;
+    return os.str();
+}
+
 static int callback(void *NotUsed, int argc, char **argv, char **azColName) {
     int i;
     for (i = 0; i < argc; i++) {
@@ -28,7 +34,7 @@ void * loop(void * m) {
 
     pthread_detach(pthread_self()); // Thread should not be joined
     while (1) {
-        
+
         string str = tcp.getMessage();
 
         // deserialization (turn string back into json)
@@ -40,6 +46,9 @@ void * loop(void * m) {
             cout << ":::DEBUG::: there is an entry with key \"temp\"" << endl;
             temp = j.at("temp");
         }
+
+        // validate that the value is as expected
+        cout << "temperature is " + tostr(temp) + " degC" << endl;
 
         tcp.clean(); // zeroes the "Message" variable and the receive buffer
         sleep(1);
@@ -65,12 +74,12 @@ int main(int argc, char** argv) {
     } else {
         fprintf(stdout, "Opened database successfully\n\n\n");
     }
-    
+
     /* Create SQL statement */
     sql = "CREATE TABLE SENSOR("  \
          "ID INT PRIMARY KEY     NOT NULL," \
          "TEMPERATURE    FLOAT   NOT NULL);";
-    
+
     /* Execute SQL statement */
     rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 
