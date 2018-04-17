@@ -66,12 +66,12 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/isd2_sqlserver: ${OBJECTFILES}
 ${OBJECTDIR}/TCPServer.o: TCPServer.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g `pkg-config --cflags sqlite3`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TCPServer.o TCPServer.cpp
+	$(COMPILE.cc) -g `pkg-config --cflags sqlite3` -std=c++11  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TCPServer.o TCPServer.cpp
 
 ${OBJECTDIR}/main.o: main.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g `pkg-config --cflags sqlite3`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
+	$(COMPILE.cc) -g `pkg-config --cflags sqlite3` -std=c++11  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
 
 # Subprojects
 .build-subprojects:

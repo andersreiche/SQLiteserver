@@ -5,6 +5,52 @@
                    displayName="Header Files"
                    projectFiles="true">
     </logicalFolder>
+    <logicalFolder name="include" displayName="include" projectFiles="true">
+      <logicalFolder name="rapidjson" displayName="rapidjson" projectFiles="true">
+        <logicalFolder name="error" displayName="error" projectFiles="true">
+          <itemPath>include/rapidjson/error/en.h</itemPath>
+          <itemPath>include/rapidjson/error/error.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="internal" displayName="internal" projectFiles="true">
+          <itemPath>include/rapidjson/internal/biginteger.h</itemPath>
+          <itemPath>include/rapidjson/internal/diyfp.h</itemPath>
+          <itemPath>include/rapidjson/internal/dtoa.h</itemPath>
+          <itemPath>include/rapidjson/internal/ieee754.h</itemPath>
+          <itemPath>include/rapidjson/internal/itoa.h</itemPath>
+          <itemPath>include/rapidjson/internal/meta.h</itemPath>
+          <itemPath>include/rapidjson/internal/pow10.h</itemPath>
+          <itemPath>include/rapidjson/internal/regex.h</itemPath>
+          <itemPath>include/rapidjson/internal/stack.h</itemPath>
+          <itemPath>include/rapidjson/internal/strfunc.h</itemPath>
+          <itemPath>include/rapidjson/internal/strtod.h</itemPath>
+          <itemPath>include/rapidjson/internal/swap.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="msinttypes" displayName="msinttypes" projectFiles="true">
+          <itemPath>include/rapidjson/msinttypes/inttypes.h</itemPath>
+          <itemPath>include/rapidjson/msinttypes/stdint.h</itemPath>
+        </logicalFolder>
+        <itemPath>include/rapidjson/allocators.h</itemPath>
+        <itemPath>include/rapidjson/cursorstreamwrapper.h</itemPath>
+        <itemPath>include/rapidjson/document.h</itemPath>
+        <itemPath>include/rapidjson/encodedstream.h</itemPath>
+        <itemPath>include/rapidjson/encodings.h</itemPath>
+        <itemPath>include/rapidjson/filereadstream.h</itemPath>
+        <itemPath>include/rapidjson/filewritestream.h</itemPath>
+        <itemPath>include/rapidjson/fwd.h</itemPath>
+        <itemPath>include/rapidjson/istreamwrapper.h</itemPath>
+        <itemPath>include/rapidjson/memorybuffer.h</itemPath>
+        <itemPath>include/rapidjson/memorystream.h</itemPath>
+        <itemPath>include/rapidjson/ostreamwrapper.h</itemPath>
+        <itemPath>include/rapidjson/pointer.h</itemPath>
+        <itemPath>include/rapidjson/prettywriter.h</itemPath>
+        <itemPath>include/rapidjson/rapidjson.h</itemPath>
+        <itemPath>include/rapidjson/reader.h</itemPath>
+        <itemPath>include/rapidjson/schema.h</itemPath>
+        <itemPath>include/rapidjson/stream.h</itemPath>
+        <itemPath>include/rapidjson/stringbuffer.h</itemPath>
+        <itemPath>include/rapidjson/writer.h</itemPath>
+      </logicalFolder>
+    </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
                    projectFiles="true">
@@ -14,6 +60,7 @@
                    projectFiles="true">
       <itemPath>TCPServer.cpp</itemPath>
       <itemPath>TCPServer.h</itemPath>
+      <itemPath>json.hpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -27,7 +74,13 @@
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
+    <itemPath>../RapidJson_HelloWorld/json.hpp</itemPath>
   </logicalFolder>
+  <sourceRootList>
+    <Elem>../../Desktop/ArduinoJson</Elem>
+    <Elem>arduinojson</Elem>
+    <Elem>include</Elem>
+  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="Debug" type="1">
@@ -37,6 +90,9 @@
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
+        <ccTool>
+          <standard>8</standard>
+        </ccTool>
         <linkerTool>
           <linkerLibItems>
             <linkerOptionItem>`pkg-config --libs sqlite3`</linkerOptionItem>
@@ -44,9 +100,109 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="../RapidJson_HelloWorld/json.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="TCPServer.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="TCPServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/allocators.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/cursorstreamwrapper.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/rapidjson/document.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/encodedstream.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/encodings.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/error/en.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/error/error.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/filereadstream.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/filewritestream.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/rapidjson/fwd.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/internal/biginteger.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/rapidjson/internal/diyfp.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/internal/dtoa.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/internal/ieee754.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/rapidjson/internal/itoa.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/internal/meta.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/internal/pow10.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/internal/regex.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/internal/stack.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/internal/strfunc.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/rapidjson/internal/strtod.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/rapidjson/internal/swap.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/istreamwrapper.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/memorybuffer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/memorystream.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/msinttypes/inttypes.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/rapidjson/msinttypes/stdint.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/rapidjson/ostreamwrapper.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/pointer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/prettywriter.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/rapidjson.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/reader.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/schema.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/stream.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/stringbuffer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/writer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="json.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -71,9 +227,109 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="../RapidJson_HelloWorld/json.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="TCPServer.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="TCPServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/allocators.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/cursorstreamwrapper.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/rapidjson/document.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/encodedstream.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/encodings.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/error/en.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/error/error.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/filereadstream.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/filewritestream.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/rapidjson/fwd.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/internal/biginteger.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/rapidjson/internal/diyfp.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/internal/dtoa.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/internal/ieee754.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/rapidjson/internal/itoa.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/internal/meta.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/internal/pow10.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/internal/regex.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/internal/stack.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/internal/strfunc.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/rapidjson/internal/strtod.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/rapidjson/internal/swap.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/istreamwrapper.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/memorybuffer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/memorystream.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/msinttypes/inttypes.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/rapidjson/msinttypes/stdint.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/rapidjson/ostreamwrapper.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/pointer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/prettywriter.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/rapidjson.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/reader.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/schema.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/stream.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/stringbuffer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/rapidjson/writer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="json.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>

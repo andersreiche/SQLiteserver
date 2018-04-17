@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <sqlite3.h> 
 #include "TCPServer.h"
+#include "json.hpp"
 
 TCPServer tcp;
 using namespace std;

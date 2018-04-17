@@ -6,10 +6,14 @@
             <name>ISD2_SQLserver</name>
             <c-extensions/>
             <cpp-extensions>cpp</cpp-extensions>
-            <header-extensions>h</header-extensions>
+            <header-extensions>h,hpp</header-extensions>
             <sourceEncoding>UTF-8</sourceEncoding>
             <make-dep-projects/>
-            <sourceRootList/>
+            <sourceRootList>
+                <sourceRootElem>../../Desktop/ArduinoJson</sourceRootElem>
+                <sourceRootElem>arduinojson</sourceRootElem>
+                <sourceRootElem>include</sourceRootElem>
+            </sourceRootList>
             <confList>
                 <confElem>
                     <name>Debug</name>
