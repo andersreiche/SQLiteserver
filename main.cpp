@@ -27,13 +27,15 @@ template <typename T> string tostr(const T& t) {
     return os.str();
 }
 
-static int callback(void *NotUsed, int argc, char **argv, char **azColName) {
-    int i;
-    for (i = 0; i < argc; i++) {
-        printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
-    }
-    printf("\n");
-    return 0;
+static int callback(void *data, int argc, char **argv, char **azColName) {
+   int i;
+   fprintf(stderr, "%s: ", (const char*)data);
+   
+   for(i = 0; i<argc; i++) {
+      printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+   }
+   printf("\n");
+   return 0;
 }
 
 void * loop(void * m) {
@@ -45,14 +47,16 @@ void * loop(void * m) {
         string str = tcp.getMessage();
 
         if (str != "") {
+            cout << ":::DEBUG:::Recieved this:" << str << endl;
+            
             // deserialization (turn string back into json)
             auto j = nlohmann::json::parse(str);
 
             // Read out a value associated with a key in the json object
-            double temp;
-            if (j.find("temp") != j.end()) {
-                cout << ":::DEBUG::: there is an entry with key \"temp\"" << endl;
-                temp = j.at("temp");
+            int amount;
+            if (j.find("amount") != j.end()) {
+                cout << ":::DEBUG::: there is an entry with key \"amount\"" << endl;
+                amount = j.at("amount");
             }
 
             if (j.find("command") != j.end()) {
@@ -62,14 +66,14 @@ void * loop(void * m) {
                 if (command == "set") {
 
                     /* Create SQL statement */
-                    string x = "INSERT INTO SENSOR (ID,TEMPERATURE) VALUES (1, " + tostr(temp) + ");";
+                    string x = "INSERT INTO SENSOR (ID,AMOUNT) VALUES (1, " + tostr(amount) + ");";
                     char *y = new char[x.length() + 1];
                     strcpy(y, x.c_str());
                     sql = y;
                     delete[] y;
 
                     /* Execute SQL statement */
-                    rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
+                    rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
 
                     if (rc != SQLITE_OK) {
                         fprintf(stderr, "SQL error: %s\n", zErrMsg);
@@ -80,7 +84,7 @@ void * loop(void * m) {
                 } else if (command == "get") {
 
                     /* Create SQL statement */
-                    sql = "SELECT * from SENSOR";
+                    sql = (char*)"SELECT * from SENSOR";
 
                     /* Execute SQL statement */
                     rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
@@ -103,7 +107,6 @@ void * loop(void * m) {
 
 int main(int argc, char** argv) {
 
-
     /* Open database */
     rc = sqlite3_open("test.db", &db);
 
@@ -115,9 +118,9 @@ int main(int argc, char** argv) {
     }
 
     /* Create SQL statement */
-    sql = "CREATE TABLE SENSOR("  \
+    sql = (char*)"CREATE TABLE SENSOR("  \
          "ID INT PRIMARY KEY     NOT NULL," \
-         "TEMPERATURE    FLOAT   NOT NULL);";
+         "AMOUNT         INT   NOT NULL);";
 
     /* Execute SQL statement */
     rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
